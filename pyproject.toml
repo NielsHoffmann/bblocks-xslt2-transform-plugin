@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bbplugin-xslt2"
+version = "0.1.0"
+description = "bblocks transform plugin: xslt2 support"
+requires-python = ">=3.10"
+dependencies = [
+    "saxonche>=12.0.0",
+]
