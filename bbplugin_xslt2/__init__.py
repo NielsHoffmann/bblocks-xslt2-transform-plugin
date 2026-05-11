@@ -7,7 +7,7 @@ from typing import AnyStr
 # Configure logging to see Saxon errors in the BBlocks build logs
 logger = logging.getLogger(__name__)
 
-transform_types = ['xslt2']
+transform_type = 'xslt2'
 # Define supported mime types
 default_inputs = ['application/xml']
 default_outputs = ['application/xml']
