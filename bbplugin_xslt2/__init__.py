@@ -7,7 +7,7 @@ from typing import AnyStr
 # Configure logging to see Saxon errors in the BBlocks build logs
 logger = logging.getLogger(__name__)
 
-transform_type = 'xslt2'
+transform_types = ['xslt2']
 # Define supported mime types
 default_inputs = ['application/xml']
 default_outputs = ['application/xml']
@@ -22,7 +22,7 @@ class SaxonXsltTransformer(Transformer):
     def __init__(self):
         super().__init__(['xslt2'], default_inputs, default_outputs)
 
-    def do_transform(self, metadata: TransformMetadata) -> AnyStr | None:
+    def transform(self, metadata: TransformMetadata) -> AnyStr | None:
         try:
             # SaxonChe requires a context manager to manage the C++ native resources
             with PySaxonProcessor(license=False) as proc:
