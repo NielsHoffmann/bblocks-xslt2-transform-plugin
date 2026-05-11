@@ -1,27 +1,24 @@
 import logging
 from typing import AnyStr
-from ogc.bblocks.models import TransformMetadata, Transformer
 from saxonche import PySaxonProcessor
 
 # Configure logging to see Saxon errors in the BBlocks build logs
 logger = logging.getLogger(__name__)
 
-# Define supported mime types
-default_inputs = ['application/xml', 'text/xml']
-default_outputs = ['application/xml', 'text/xml', 'text/html', 'text/plain']
 
-class SaxonXsltTransformer(Transformer):
+
+class SaxonXsltTransformer:
     """
     A Transformer plugin that supports XSLT 2.0 and 3.0 using the Saxon-HE 
     (SaxonChe) library.
     """
+    transform_types = ['xslt2', 'xslt3']
+    # Define supported mime types
+    default_inputs = ['application/xml', 'text/xml']
+    default_outputs = ['application/xml', 'text/xml', 'text/html', 'text/plain']
+   
 
-    def __init__(self):
-        # We register this under the 'xslt' type, or a custom name like 'xslt-saxon'
-        # to avoid conflict with the built-in lxml-based XSLT 1.0 transformer.
-        super().__init__(['xslt-saxon', 'xslt2', 'xslt3'], default_inputs, default_outputs)
-
-    def do_transform(self, metadata: TransformMetadata) -> AnyStr | None:
+    def transform(self, metadata) -> AnyStr | None:
         try:
             # SaxonChe requires a context manager to manage the C++ native resources
             with PySaxonProcessor(license=False) as proc:
