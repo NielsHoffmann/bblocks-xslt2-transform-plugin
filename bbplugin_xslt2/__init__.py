@@ -1,4 +1,5 @@
 import logging
+# pyrefly: ignore [missing-import]
 from saxonche import PySaxonProcessor
 from typing import AnyStr
 
@@ -40,8 +41,8 @@ class SaxonXsltTransformer:
                 # Perform transformation
                 result_str = executable.transform_to_string(xdm_node=input_node)
                 
-                return str(result_str).decode('utf-8')
+                return str(result_str)
 
         except Exception as e:
             logger.error(f"Error during Saxon XSLT transformation: {str(e)}")
-            return None
+            raise e
