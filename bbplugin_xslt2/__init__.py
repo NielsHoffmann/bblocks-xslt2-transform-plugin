@@ -1,5 +1,4 @@
 import logging
-from typing import AnyStr
 from saxonche import PySaxonProcessor
 
 # Configure logging to see Saxon errors in the BBlocks build logs
@@ -18,7 +17,7 @@ class SaxonXsltTransformer:
     default_outputs = ['application/xml']
    
 
-    def transform(self, metadata) -> AnyStr | None:
+    def transform(self, metadata):
         try:
             # SaxonChe requires a context manager to manage the C++ native resources
             with PySaxonProcessor(license=False) as proc:
@@ -39,7 +38,7 @@ class SaxonXsltTransformer:
                 # Perform transformation
                 result_str = executable.transform_to_string(xdm_node=input_node)
                 
-                return result_str
+                return str(result_str)
 
         except Exception as e:
             logger.error(f"Error during Saxon XSLT transformation: {str(e)}")
