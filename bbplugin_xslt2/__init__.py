@@ -28,7 +28,8 @@ class SaxonXsltTransformer:
                 
                 # Load the input XML
                 # Saxon handles encoding internally from the string or bytes provided
-                input_node = proc.parse_xml(xml_text=metadata.input_data)
+                builder = proc.new_document_builder()
+                input_node = builder.parse_xml(xml_text=metadata.input_data)
                 
                 # Compile the XSLT 2.0 stylesheet
                 executable = xslt_proc.compile_stylesheet(stylesheet_text=metadata.transform_content)
